@@ -40,7 +40,7 @@ function showNotes() {
     }
 }
 
-// Deleting A Note
+// Deleting a Note
 
 function deleteNote(index){
     let notes = localStorage.getItem("notes");
@@ -53,3 +53,20 @@ function deleteNote(index){
     localStorage.setItem("notes", JSON.stringify(noteObj));
     showNotes();
 }
+
+// Searching a Note
+
+let searchText = document.getElementById("searchTxt");
+
+searchText.addEventListener("input", function(){
+    let searchResult = searchText.value.toLowerCase();
+    let cards = document.getElementsByClassName("noteCard");
+    Array.from(cards).forEach(function(ele){
+        let cardTxt = ele.getElementsByTagName("p")[0].innerText;
+        if(cardTxt.includes(searchResult)){
+            ele.style.display = "block";
+        }else{
+            ele.style.display = "none";
+        }
+    })
+})
